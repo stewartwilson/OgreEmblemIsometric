@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07297da207911da489d2f2e285b0f8eb, type: 3}
+  m_Name: Battle Data
+  m_EditorClassIdentifier: 
+  battleMapData: {fileID: 11400000, guid: bc6e46804cf343a49af9fba3d6ec3ba8, type: 2}
+  playerGroup: {fileID: 11400000, guid: a0ef19e07d11e4141b81238ed2bb4d6f, type: 2}
+  enemyGroup: {fileID: 11400000, guid: f5ccaa270f51a704c8fbbe141dd687b4, type: 2}
+  sceneName: Flat Grass Battle Map
+  afterBattle: 1
+  didPlayerWin: 1

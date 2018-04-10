@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: c8d7cc90c1c87b947bb8a00656f4c892
+  - enabled: 1
+    path: Assets/Scenes/Persistence.unity
+    guid: 75f51bf762513be47befc7732e1988f8
+  - enabled: 1
+    path: Assets/Scenes/Flat Battle.unity
+    guid: 985678498f58c4145a45e44a203ce09f
+  - enabled: 1
+    path: Assets/Scenes/Start Menu.unity
+    guid: b89d3bc67259166468e3830f472a8852
+  - enabled: 1
+    path: Assets/Scenes/Overworld.unity
+    guid: c5fa8d48462b3d1429685bb8f6b3efab
+  - enabled: 1
+    path: Assets/Scenes/New Game.unity
+    guid: 5fe830dec2e162f489809b551c94a4c7
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level 1.unity
+    guid: 93f4324f0e5f42d4dae87b6e3c6882c2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level 2.unity
+    guid: 5341922c36bf29948a2ee592a62208c5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level 3.unity
+    guid: 790cbf69ece3a834c9acf1e2f2d35c1a
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level 4.unity
+    guid: 5ddaa353908599d49b127c48f359c40e
+  - enabled: 1
+    path: Assets/Scenes/Battle.unity
+    guid: 05aad0e1067e3d94a9ca4ac7379488f3

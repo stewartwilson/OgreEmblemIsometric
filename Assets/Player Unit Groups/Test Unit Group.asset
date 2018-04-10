@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555eb15b05bef62478dc676441ad2cdc, type: 3}
+  m_Name: Test Unit Group
+  m_EditorClassIdentifier: 
+  id: 
+  leader: {fileID: 11400000, guid: 68729a64950fc47488b0fd495d7f1dbe, type: 2}
+  items: []
+  ids: []
+  unitList:
+  - position: 0
+    unit: {fileID: 11400000, guid: c5afe90068deb4b40a6dd81b4ff8074a, type: 2}
+  - position: 1
+    unit: {fileID: 11400000, guid: 68729a64950fc47488b0fd495d7f1dbe, type: 2}
+  - position: 2
+    unit: {fileID: 11400000, guid: 0b988d03a0919b942a145f6928af5325, type: 2}
