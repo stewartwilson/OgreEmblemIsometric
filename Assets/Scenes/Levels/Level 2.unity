@@ -733,9 +733,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44b1281ef0d1ba4d95b66bf0a383f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 0}
+  levelData: {fileID: 11400000, guid: 2ad9b46cb4a65fb46b50199394be7b2e, type: 2}
+  possibleBattleList: []
+  unitData:
+    unitPositions: []
+    battleStarted: 0
+    battleUnitPlayer: {fileID: 0}
+    battleUnitEnemy: {fileID: 0}
   generateMapObjects: 1
   updateLevelData: 0
+  updateLevelDataBasic: 1
 --- !u!4 &631037671
 Transform:
   m_ObjectHideFlags: 0
@@ -823,6 +830,7 @@ MonoBehaviour:
   panelUIActive: 0
   cursorDelay: 0.2
   canCursorMove: 0
+  nextCursorMoveAllowed: 0
   cursor: {fileID: 34357741}
   cursorX: 0
   cursorY: 0

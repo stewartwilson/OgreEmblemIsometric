@@ -15,8 +15,7 @@ public class InputController : MonoBehaviour
     public float nextCursorMoveAllowed;
     //Holds cursor object
     public GameObject cursor;
-    public int cursorX;
-    public int cursorY;
+    public GridPosition cursorPosition;
     public int maxCursorXPos;
     public int maxCursorYPos;
     public bool touching;
@@ -86,40 +85,53 @@ public class InputController : MonoBehaviour
             //resonsible for moving cursor when nothing is selected
             if (!(Time.time < nextCursorMoveAllowed))
             {
+                GridPosition startPostion = new GridPosition(cursorPosition.x, cursorPosition.y, cursorPosition.elevation);
                 if (vertical > 0)
                 {
-                    cursorY++;
+                    cursorPosition.y++;
                 }
                 if (vertical < 0)
                 {
-                    cursorY--;
+                    cursorPosition.y--;
                 }
                 if (horizontal > 0)
                 {
-                    cursorX++;
+                    cursorPosition.x++;
                 }
                 if (horizontal < 0)
                 {
-                    cursorX--;
+                    cursorPosition.x--;
                 }
 
-                if (cursorY < 0)
+                if (cursorPosition.y < 0)
                 {
-                    cursorY = 0;
+                    cursorPosition.y = 0;
                 }
-                if (cursorX < 0)
+                if (cursorPosition.x < 0)
                 {
-                    cursorX = 0;
+                    cursorPosition.x = 0;
                 }
-                if (cursorY > maxCursorYPos)
+                if (cursorPosition.y > maxCursorYPos)
                 {
-                    cursorY = maxCursorYPos;
+                    cursorPosition.y = maxCursorYPos;
                 }
-                if (cursorX > maxCursorXPos)
+                if (cursorPosition.x > maxCursorXPos)
                 {
-                    cursorX = maxCursorXPos;
+                    cursorPosition.x = maxCursorXPos;
                 }
-                updateCursor();
+                if (movingUnit) {
+                    if(GameObject.Find("Level Controller").GetComponent<LevelController>().possibleMoves.Contains(cursorPosition)) {
+                        updateCursor();
+                    }
+                    else
+                    {
+                        cursorPosition = startPostion;
+                    }
+                } else 
+                {
+                    updateCursor();
+                }
+                
 
                 nextCursorMoveAllowed = Time.time + cursorDelay;
             }
@@ -129,6 +141,7 @@ public class InputController : MonoBehaviour
                 if (enter)
                 {
                     selectObject(cursor.GetComponent<CursorController>().objectInTile);
+                    GameObject.Find("Level Controller").GetComponent<LevelController>().selectedUnit = selectedObject;
                     unitsOriginalLocation = selectedObject.transform.position;
                 }
             }
@@ -139,10 +152,12 @@ public class InputController : MonoBehaviour
                     
                     moveUnitTo(cursor.transform.position + new Vector3(0, .5f));
                     selectedObject = null;
+                    GameObject.Find("Level Controller").GetComponent<LevelController>().selectedUnit = null;
                 }
                 if (enter && !movingUnit)
                 {
                     selectedObject = null;
+                    GameObject.Find("Level Controller").GetComponent<LevelController>().selectedUnit = null;
                 }
             }
         }
@@ -156,8 +171,9 @@ public class InputController : MonoBehaviour
     public void updateCursor()
     {
         LevelData levelData = GameObject.Find("Level Controller").GetComponent<LevelController>().levelData;
-        MapTile mt = levelData.getMapTileFromXY(cursorX, cursorY);
-        cursor.transform.position = IsometricHelper.coordXYToPostion(cursorX,cursorY,mt.elevation);
+        MapTile mt = levelData.getMapTileFromXY(cursorPosition);
+        cursor.transform.position = IsometricHelper.gridToGamePostion(cursorPosition);
+        
     }
 
     /**
@@ -199,6 +215,7 @@ public class InputController : MonoBehaviour
         {
             selectedObject.transform.position = destination;
             unitBeingPlaced = selectedObject;
+            selectedObject.GetComponent<PlayerUnitController>().position = cursorPosition;
             placingUnit = true;
             if (cursor.GetComponent<CursorController>().objectInTile != null && 
                 "Enemy Unit".Equals(cursor.GetComponent<CursorController>().objectInTile.tag))
@@ -248,7 +265,7 @@ public class InputController : MonoBehaviour
     private BattleMapData getBattleLevelData()
     {
         BattleMapData battleLevelData = null;
-        MapTile battleTile = levelData.getMapTileFromXY(cursorX, cursorY);
+        MapTile battleTile = levelData.getMapTileFromXY(cursorPosition);
         if (GameObject.Find("Level Controller") != null) {
             battleLevelData = GameObject.Find("Level Controller").GetComponent<LevelController>().getCorrectBattleMap(battleTile.groundType);
         }

@@ -208,23 +208,23 @@ public class CombatController : MonoBehaviour {
 
         foreach(UnitPosition up in playerGroup.unitList)
         {
-            Vector2 unitPos = IsometricHelper.battleCoordToPostion(up.position, true);
-            Debug.Log("Position " + (int)unitPos.x + ", " + (int)unitPos.y);
+            GridPosition unitPos = IsometricHelper.battleCoordToPostion(up.position, true);
+            Debug.Log("Position " + unitPos.x + ", " + unitPos.y);
             GameObject go = (GameObject)Instantiate(Resources.Load("Monk"));
             go.transform.SetParent(GameObject.Find("Player Units").transform);
-            go.transform.position = IsometricHelper.coordXYToPostion((int)unitPos.x, (int)unitPos.y, playerElevation);
-            go.GetComponent<SpriteRenderer>().sortingOrder = IsometricHelper.getTileSortingOrder((int)unitPos.x, (int)unitPos.y);
+            go.transform.position = IsometricHelper.gridToGamePostion(unitPos);
+            go.GetComponent<SpriteRenderer>().sortingOrder = IsometricHelper.getTileSortingOrder(unitPos);
             go.name = up.unit.unitName;
             go.GetComponent<CombatUnitController>().facing = Facing.Back;
         }
         foreach (UnitPosition up in enemyGroup.unitList)
         {
-            Vector2 unitPos = IsometricHelper.battleCoordToPostion(up.position, false);
+            GridPosition unitPos = IsometricHelper.battleCoordToPostion(up.position, false);
             Debug.Log("Position " + (int)unitPos.x + ", " + (int)unitPos.y);
             GameObject go = (GameObject)Instantiate(Resources.Load("Monk"));
             go.transform.SetParent(GameObject.Find("Enemy Units").transform);
-            go.transform.position = IsometricHelper.coordXYToPostion((int)unitPos.x, (int)unitPos.y, playerElevation);
-            go.GetComponent<SpriteRenderer>().sortingOrder = IsometricHelper.getTileSortingOrder((int)unitPos.x, (int)unitPos.y);
+            go.transform.position = IsometricHelper.gridToGamePostion(unitPos);
+            go.GetComponent<SpriteRenderer>().sortingOrder = IsometricHelper.getTileSortingOrder(unitPos);
             go.name = up.unit.unitName;
             go.GetComponent<CombatUnitController>().facing = Facing.Forward;
         }
@@ -237,7 +237,7 @@ public class CombatController : MonoBehaviour {
         {
             count++;
             GameObject go = (GameObject)Instantiate(Resources.Load("Grass Tile"));
-            if (mt.x < 4 && mt.y < 3)
+            if (mt.position.x < 4 && mt.position.y < 3)
             {
                 go.transform.SetParent(GameObject.Find("Player Tiles").transform);
             }
@@ -245,8 +245,8 @@ public class CombatController : MonoBehaviour {
             {
                 go.transform.SetParent(GameObject.Find("Enemy Tiles").transform);
             }
-            go.transform.position = IsometricHelper.coordXYToPostion(mt.x, mt.y, mt.elevation);
-            go.GetComponent<SpriteRenderer>().sortingOrder = IsometricHelper.getTileSortingOrder(mt.x, mt.y);
+            go.transform.position = IsometricHelper.gridToGamePostion(mt.position);
+            go.GetComponent<SpriteRenderer>().sortingOrder = IsometricHelper.getTileSortingOrder(mt.position);
             go.name = "Tile " + count;
 
         }

@@ -9,19 +9,17 @@ public class MapTile {
     [SerializeField]
     public int elevation;
     [SerializeField]
-    public int x;
+    public GridPosition position;
     [SerializeField]
-    public int y;
-    [SerializeField]
-    bool safeToStand;
+    public bool safeToStand;
 
     public MapTile(int[] data)
     {
         if(data.Length == 5)
         {
             groundType = (GroundType)data[0];
-            x = data[1];
-            y = data[2];
+            position.x = data[1];
+            position.y = data[2];
             elevation = data[3];
             if (data[4] == 0)
                 safeToStand = false;

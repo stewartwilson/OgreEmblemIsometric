@@ -38,3 +38,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Battle.unity
     guid: 05aad0e1067e3d94a9ca4ac7379488f3
+  - enabled: 1
+    path: Assets/Scenes/Battle Maps/Flat Grass Battle Map.unity
+    guid: 3cf9e8867e1d8c44bbb5d72f4bcb62ac

@@ -10,11 +10,11 @@ public static class IsometricHelper
      * unity. Method also takes into accoutn elevation of the tile
      * 
      */
-    public static Vector2 coordXYToPostion(int x, int y, int elevation)
+    public static Vector2 gridToGamePostion(GridPosition pos)
     {
-        float posX = -(y * XDELTA) + (x * XDELTA);
-        float posY = (y * YDELTA) + (x * YDELTA);
-        posY += elevation * YDELTA;
+        float posX = -(pos.y * XDELTA) + (pos.x * XDELTA);
+        float posY = (pos.y * YDELTA) + (pos.x * YDELTA);
+        posY += pos.elevation * YDELTA;
         return new Vector2(posX, posY);
     }
 
@@ -23,10 +23,22 @@ public static class IsometricHelper
      * are displayed in the correct order
      * 
      */
-    public static int getTileSortingOrder(int x, int y)
+    public static int getTileSortingOrder(GridPosition pos)
     {
-        int sortingOrder = -x + -y;
+        int sortingOrder = -pos.x + -pos.y;
         return sortingOrder;
+    }
+
+    /**
+     * Assigns the sorting order tiles shoudl have so the sprites 
+     * are displayed in the correct order
+     * 
+     */
+    public static int distanceBetweenGridPositions(GridPosition one, GridPosition two)
+    {
+        int distanceX = Mathf.Abs(one.x - two.x);
+        int distanceY = Mathf.Abs(one.y - two.y);
+        return distanceX+distanceY;
     }
 
 
@@ -35,7 +47,7 @@ public static class IsometricHelper
      * position to be displayed
      * 
      */
-    public static Vector2 battleCoordToPostion(int pos, bool isPlayer)
+    public static GridPosition battleCoordToPostion(int pos, bool isPlayer)
     {
         int x = 0;
         int y = 0;
@@ -130,7 +142,7 @@ public static class IsometricHelper
             }
         }
         
-        return new Vector2(x, y);
+        return new GridPosition(x,y);
     }
 
 

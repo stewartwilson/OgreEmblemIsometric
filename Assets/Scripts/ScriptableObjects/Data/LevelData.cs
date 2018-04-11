@@ -14,19 +14,19 @@ public class LevelData : ScriptableObject
     public int endLine;
     [SerializeField]
     public string sceneName;
-    
+
 
 
     /**  
      *  Will return the map tile fro mthe List that matches the
      *  x and y cooridnates
      *
-     */ 
-    public MapTile getMapTileFromXY(int x, int y)
+     */
+    public MapTile getMapTileFromXY(GridPosition pos)
     {
         foreach(MapTile mt in map)
         {
-            if(mt.x == x && mt.y == y)
+            if(mt.position.x == pos.x && mt.position.y == pos.y)
             {
                 return mt;
             }
@@ -43,9 +43,9 @@ public class LevelData : ScriptableObject
         int maxX = 0;
         foreach (MapTile mt in map)
         {
-            if (mt.x > maxX)
+            if (mt.position.x > maxX)
             {
-                maxX = mt.x;
+                maxX = mt.position.x;
             }
         }
         return maxX;
@@ -60,9 +60,9 @@ public class LevelData : ScriptableObject
         int maxY = 0;
         foreach (MapTile mt in map)
         {
-            if (mt.y > maxY)
+            if (mt.position.y > maxY)
             {
-                maxY = mt.y;
+                maxY = mt.position.y;
             }
         }
         return maxY;
@@ -100,5 +100,28 @@ public class LevelData : ScriptableObject
         }
     }
 
+    /**  
+     *  Will generate the list of tiles based on the text file
+     *  attached to this asset 
+     *
+     */
+    public void generateBasicFlatMap(int width, int height)
+    {
+        map = new List<MapTile>();
+        for (int i = 0; i <= width; i++)
+        {
+            for (int j = 0; j <= height; j++)
+            {
+                int[] values = new int[5];
+                values[0] = 0;
+                values[1] = i;
+                values[2] = j;
+                values[3] = 0;
+                values[4] = 1;
+                map.Add(new MapTile(values));
+            }
+        }
+        
+    }
 }
 

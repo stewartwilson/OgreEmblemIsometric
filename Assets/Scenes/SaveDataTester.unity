@@ -373,7 +373,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameName: SaveTest
-  gameData: {fileID: 0}
+  saveData:
+    testValue: 0
+  gameData: {fileID: 11400000, guid: 93d9ff34cb93a694c9c338134a65f2a5, type: 2}
 --- !u!114 &1345370264
 MonoBehaviour:
   m_ObjectHideFlags: 0

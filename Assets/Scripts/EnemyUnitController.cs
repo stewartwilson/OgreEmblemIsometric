@@ -4,4 +4,9 @@ using UnityEngine;
 
 public class EnemyUnitController : UnitController {
 
+    protected void Update()
+    {
+        animator.SetInteger("Facing", (int)facing);
+        updateIfDefeated();
+    }
 }

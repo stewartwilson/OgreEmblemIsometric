@@ -9,8 +9,7 @@ public class OverworldInputController : MonoBehaviour
     float nextCursorMoveAllowed;
     //Holds cursor object
     public GameObject cursor;
-    public int cursorX;
-    public int cursorY;
+    public GridPosition cursorPositon;
     public int maxCursorXPos = 1;
     public int maxCursorYPos = 0;
     //Hold onto an object that the cursor has selected
@@ -44,15 +43,15 @@ public class OverworldInputController : MonoBehaviour
             //resonsible for moving cursor when nothing is selected
             if (!(Time.time < nextCursorMoveAllowed))
             {
-                if (cursorX < maxCursorXPos && horizontal > 0)
+                if (cursorPositon.x < maxCursorXPos && horizontal > 0)
                 {
-                    cursorX++;
-                    cursorY--;
+                    cursorPositon.x++;
+                    cursorPositon.y--;
                 }
-                if (cursorX > 0 && horizontal < 0)
+                if (cursorPositon.x > 0 && horizontal < 0)
                 {
-                    cursorX--;
-                    cursorY++;
+                    cursorPositon.x--;
+                    cursorPositon.y++;
                 }
                 updateCursor();
 
@@ -75,7 +74,7 @@ public class OverworldInputController : MonoBehaviour
      */
     public void updateCursor()
     {
-        cursor.transform.position = IsometricHelper.coordXYToPostion(cursorX,cursorY,0);
+        cursor.transform.position = IsometricHelper.gridToGamePostion(cursorPositon);
     }
 
     /**

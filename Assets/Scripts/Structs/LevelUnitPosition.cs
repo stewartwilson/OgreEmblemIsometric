@@ -1,7 +1,8 @@
 ﻿[System.Serializable]
 public struct LevelUnitPosition
 {
-    public int x;
-    public int y;
+    public GridPosition position;
+    public int elevation;
+    public Facing facing;
     public Unit unit;
 }

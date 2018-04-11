@@ -15,9 +15,9 @@ MonoBehaviour:
   timePlayed: 1 hour
   lastPlayed: today
   playerData:
-    playerName: 
-    playTime: 
-    currentMission: 
+    playerName: Stewart
+    playTime: 1 hout
+    currentMission: Stewart goes wild
     units:
     - {fileID: 11400000, guid: c5afe90068deb4b40a6dd81b4ff8074a, type: 2}
     unitGroups: []

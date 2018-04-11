@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f9d28874860dff488b8ce3073cc7eb9, type: 3}
-  m_Name: Brass Knuckles
+  m_Name: New Weapon
   m_EditorClassIdentifier: 
-  itemName: Brass Knuckles
+  itemName: Stick
   description: 
   icon: {fileID: 0}
-  value: 10
-  attackPower: 1
+  value: 0
+  attackPower: 0
   isRanged: 0

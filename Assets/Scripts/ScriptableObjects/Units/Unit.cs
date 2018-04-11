@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class Unit : ScriptableObject {
 
     public Sprite sprite;
-    public string id;
     public string unitName;
     public UnitClass unitClass;
     public int width;
@@ -17,7 +16,6 @@ public abstract class Unit : ScriptableObject {
     public int dexterity;
     public int wisdom;
     public int vitality;
-    public int speed;
     public int health;
     public int maxHealth;
     public int alignment;
@@ -28,13 +26,7 @@ public abstract class Unit : ScriptableObject {
     public Weapon mainWeapon;
     public bool canLead;
     public bool isEnemy;
-
-    private int generateUniqueID()
-    {
-        int uniqueID = 0;
-
-        return uniqueID;
-    }
+    public int maxMovement;
 
     public void levelUp()
     {
