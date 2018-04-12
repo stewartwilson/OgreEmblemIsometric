@@ -1,19 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelController : MonoBehaviour {
+public class LevelEditorController : MonoBehaviour {
     public LevelData levelData;
     public List<BattleMapData> possibleBattleList;
     public LevelUnitData unitData;
     public bool generateMapObjects;
     public bool updateLevelData;
     public bool updateLevelDataBasic;
-    public GameObject selectedUnit;
-    public GameObject movesContainer;
-    public bool displayingMoves;
-    public List<GridPosition> possibleMoves;
 
     // Use this for initialization
     void Awake() {
@@ -37,51 +35,11 @@ public class LevelController : MonoBehaviour {
 
     private void Start()
     {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(levelData.sceneName));
-        displayingMoves = false;
     }
 
     // Update is called once per frame
     void Update () {
-        if(selectedUnit != null && !displayingMoves)
-        {
-            GridPosition gp =  selectedUnit.GetComponent<PlayerUnitController>().position;
-            int maxMovement = selectedUnit.GetComponent<PlayerUnitController>().maxMovement;
-            possibleMoves = getPossibleMovement(gp, maxMovement);
-            
-            InstantiateMovesDisplay(possibleMoves);
-            displayingMoves = true;
-        } else if (selectedUnit == null)
-        {
-            if (displayingMoves) {
-                destroyMovesDisplay();
-                displayingMoves = false;
-            }
-        }
-    }
-
-    private void InstantiateMovesDisplay(List<GridPosition> moves)
-    {
-        int count = 0;
-        foreach (GridPosition pos in moves)
-        {
-            count++;
-            GameObject go = (GameObject)Instantiate(Resources.Load("Possible Move"));
-            Debug.Log(go);
-            go.transform.SetParent(movesContainer.transform);
-            go.transform.position = IsometricHelper.gridToGamePostion(pos);
-            go.GetComponent<SpriteRenderer>().sortingOrder = IsometricHelper.getTileSortingOrder(pos);
-            go.name = "Move " + count;
-
-        }
-    }
-
-    private void destroyMovesDisplay()
-    {
-        foreach (Transform child in movesContainer.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        
     }
 
     private void InstantiateLevelMap()
@@ -99,19 +57,39 @@ public class LevelController : MonoBehaviour {
         }
     }
 
-    private void ExportLevelMap()
+    public void UpdateLevelMap()
     {
+        foreach (Transform child in GameObject.Find("Tiles").transform)
+        {
+            Destroy(child.gameObject);
+        }
         int count = 0;
         foreach (MapTile mt in levelData.map)
         {
             count++;
-            GameObject go = (GameObject)Instantiate(Resources.Load("Grass Tile"));
+            GameObject go = (GameObject)Instantiate(Resources.Load("Pixel Tile"));
             go.transform.SetParent(GameObject.Find("Tiles").transform);
             go.transform.position = IsometricHelper.gridToGamePostion(mt.position);
             go.GetComponent<SpriteRenderer>().sortingOrder = IsometricHelper.getTileSortingOrder(mt.position);
             go.name = "Tile " + count;
 
         }
+    }
+
+    public void ExportLevelMap()
+    {
+        StreamWriter sr = File.CreateText("Assets/Text Files/New Level.txt");
+        Debug.Log(sr.ToString());
+        string line = "";
+        foreach (MapTile mt in levelData.map)
+        {
+
+            line += Convert.ToInt32(mt.groundType) + "," + mt.position.x + "," + mt.position.y + "," + mt.position.elevation + "," + Convert.ToInt32(mt.safeToStand) + "|";
+        }
+        line.TrimEnd('|');
+        sr.WriteLine(line);
+        sr.Close();
+        
     }
 
     public BattleMapData getCorrectBattleMap(GroundType groundType)

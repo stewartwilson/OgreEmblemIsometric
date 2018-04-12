@@ -7,15 +7,15 @@ public class LevelUnitData
 {
     public List<LevelUnitPosition> unitPositions;
     public bool battleStarted = false;
-    public Unit battleUnitPlayer;
-    public Unit battleUnitEnemy;
+    public UnitGroup battleUnitPlayer;
+    public UnitGroup battleUnitEnemy;
 
-    public void moveUnit(Unit u, GridPosition pos, int elevation)
+    public void moveUnit(UnitGroup ug, GridPosition pos)
     {
         LevelUnitPosition toMove;
         foreach (LevelUnitPosition lup in unitPositions)
         {
-            if (u.Equals(lup.unit))
+            if (ug.Equals(lup.unitGroup))
             {
                 toMove = lup;
                 break;
@@ -23,7 +23,7 @@ public class LevelUnitData
         }
         toMove.position.x = pos.x;
         toMove.position.y = pos.y;
-        toMove.elevation = elevation;
+        toMove.position.elevation = pos.elevation;
     }
 
     public bool isSquareEmpty(GridPosition pos)
@@ -34,6 +34,16 @@ public class LevelUnitData
                 return false;
         }
         return true;
+    }
+
+    public UnitGroup getUnitAt(GridPosition pos)
+    {
+        foreach (LevelUnitPosition lup in unitPositions)
+        {
+            if (lup.position.x == pos.x && lup.position.y == pos.y)
+                return lup.unitGroup;
+        }
+        return null;
     }
 }
 

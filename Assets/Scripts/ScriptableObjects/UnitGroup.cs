@@ -16,6 +16,8 @@ public class UnitGroup : ScriptableObject {
     [SerializeField]
     public List<Item> items;
     [SerializeField]
+    public bool isEnemy;
+    [SerializeField]
     public List<UnitPosition> unitList;
     [SerializeField]
     public int movementDistance;

@@ -12,7 +12,9 @@ public class UnitController : MonoBehaviour {
     public bool canMove;
     protected Animator animator;
     public GridPosition position;
+    public List<GridPosition> currentPath;
     public int maxMovement;
+    public Vector2 spriteOffset;
 
     protected void Start()
     {

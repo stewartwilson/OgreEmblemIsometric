@@ -20,4 +20,4 @@ MonoBehaviour:
     unit: {fileID: 11400000, guid: 68729a64950fc47488b0fd495d7f1dbe, type: 2}
   - position: 8
     unit: {fileID: 11400000, guid: 0b988d03a0919b942a145f6928af5325, type: 2}
-  movementDistance: 0
+  movementDistance: 2

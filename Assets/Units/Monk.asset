@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Name: Monk
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300010, guid: 40bbcd4a8d894da4ca9d48beb28dea34, type: 3}
-  id: 
   unitName: Rick
   unitClass: 1
   width: 0
@@ -23,7 +22,6 @@ MonoBehaviour:
   dexterity: 10
   wisdom: 0
   vitality: 0
-  speed: 0
   health: 10
   maxHealth: 10
   alignment: 0
@@ -33,3 +31,4 @@ MonoBehaviour:
   mainWeapon: {fileID: 11400000, guid: 55fd1a910fba05f46b148ae69feb4054, type: 2}
   canLead: 1
   isEnemy: 0
+  maxMovement: 2

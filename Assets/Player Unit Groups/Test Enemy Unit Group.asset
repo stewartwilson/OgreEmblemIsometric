@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555eb15b05bef62478dc676441ad2cdc, type: 3}
   m_Name: Test Enemy Unit Group
   m_EditorClassIdentifier: 
-  id: 
   leader: {fileID: 11400000, guid: e8e0827c40f0eb94da9a49798c3cc851, type: 2}
   items: []
-  ids: []
+  isEnemy: 1
   unitList:
   - position: 1
     unit: {fileID: 11400000, guid: e8e0827c40f0eb94da9a49798c3cc851, type: 2}
+  movementDistance: 0

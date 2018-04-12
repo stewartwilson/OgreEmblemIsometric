@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Name: Enemy Monk
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300002, guid: 40bbcd4a8d894da4ca9d48beb28dea34, type: 3}
-  id: 
   unitName: Stan
   unitClass: 1
   width: 0
@@ -23,8 +22,7 @@ MonoBehaviour:
   dexterity: 0
   wisdom: 0
   vitality: 0
-  speed: 0
-  health: 0
+  health: 4
   maxHealth: 10
   alignment: 0
   critChance: 0
@@ -33,3 +31,4 @@ MonoBehaviour:
   mainWeapon: {fileID: 11400000, guid: 55fd1a910fba05f46b148ae69feb4054, type: 2}
   canLead: 1
   isEnemy: 1
+  maxMovement: 0

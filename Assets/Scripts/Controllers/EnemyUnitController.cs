@@ -8,5 +8,6 @@ public class EnemyUnitController : UnitController {
     {
         animator.SetInteger("Facing", (int)facing);
         updateIfDefeated();
+        transform.position = IsometricHelper.gridToGamePostion(position) + spriteOffset;
     }
 }

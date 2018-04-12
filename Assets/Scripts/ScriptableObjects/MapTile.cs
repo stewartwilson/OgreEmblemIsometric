@@ -7,8 +7,6 @@ public class MapTile {
     [SerializeField]
     public GroundType groundType;
     [SerializeField]
-    public int elevation;
-    [SerializeField]
     public GridPosition position;
     [SerializeField]
     public bool safeToStand;
@@ -20,7 +18,7 @@ public class MapTile {
             groundType = (GroundType)data[0];
             position.x = data[1];
             position.y = data[2];
-            elevation = data[3];
+            position.elevation = data[3];
             if (data[4] == 0)
                 safeToStand = false;
             else

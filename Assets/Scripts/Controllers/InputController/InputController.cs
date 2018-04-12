@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 public class InputController : MonoBehaviour
 {
-
-    
     public GameObject playerUnitUIPanel;
     public GameObject enemyUnitUIPanel;
     public bool panelUIActive;
@@ -19,20 +17,22 @@ public class InputController : MonoBehaviour
     public int maxCursorXPos;
     public int maxCursorYPos;
     public bool touching;
-    //Hold onto an object that the cursor has selected
+    //Hold an object that the cursor has selected
     public GameObject selectedObject;
     public bool movingUnit;
     public bool inspectingUnit;
     public bool placingUnit;
-    //hols onto unit being move to determine location and directino facing
+    //holds unit being move to determine location and directino facing
     public GameObject unitBeingPlaced;
     //holds units original location before an attempted move
     private Vector2 unitsOriginalLocation;
     private LevelData levelData;
+    private LevelController levelController;
 
     private void Start()
     {
-        levelData = GameObject.Find("Level Controller").GetComponent<LevelController>().levelData;
+        levelController = GameObject.Find("Level Controller").GetComponent<LevelController>();
+        levelData = levelController.levelData;
         maxCursorXPos = levelData.getMaxX();
         maxCursorYPos = levelData.getMaxY();
     }
@@ -74,10 +74,12 @@ public class InputController : MonoBehaviour
             {
                 unitBeingPlaced.transform.position = unitsOriginalLocation;
                 placingUnit = false;
+                movingUnit = false;
             }
             else if(enter)
             {
                 placingUnit = false;
+                movingUnit = false;
             }
         }
         else
@@ -120,18 +122,23 @@ public class InputController : MonoBehaviour
                     cursorPosition.x = maxCursorXPos;
                 }
                 if (movingUnit) {
-                    if(GameObject.Find("Level Controller").GetComponent<LevelController>().possibleMoves.Contains(cursorPosition)) {
+                    
+                    if(levelController.possibleMoves.Contains(cursorPosition)) {
                         updateCursor();
                     }
                     else
                     {
                         cursorPosition = startPostion;
                     }
-                } else 
-                {
+                } else {
                     updateCursor();
                 }
-                
+                if(movingUnit && back)
+                {
+                    movingUnit = false;
+                    selectedObject = null;
+                    levelController.selectedUnit = null;
+                }
 
                 nextCursorMoveAllowed = Time.time + cursorDelay;
             }
@@ -141,23 +148,27 @@ public class InputController : MonoBehaviour
                 if (enter)
                 {
                     selectObject(cursor.GetComponent<CursorController>().objectInTile);
-                    GameObject.Find("Level Controller").GetComponent<LevelController>().selectedUnit = selectedObject;
                     unitsOriginalLocation = selectedObject.transform.position;
+
                 }
             }
             else
             {
                 if (movingUnit && enter)
                 {
-                    
-                    moveUnitTo(cursor.transform.position + new Vector3(0, .5f));
+                    levelController.moveUnitGroup(cursorPosition);
+                    //moveUnitTo(cursor.transform.position + new Vector3(0, .5f));
+                    movingUnit = false;
+                    placingUnit = true;
+                    unitBeingPlaced = selectedObject;
                     selectedObject = null;
-                    GameObject.Find("Level Controller").GetComponent<LevelController>().selectedUnit = null;
+                    levelController.selectedUnit = null;
                 }
                 if (enter && !movingUnit)
                 {
                     selectedObject = null;
-                    GameObject.Find("Level Controller").GetComponent<LevelController>().selectedUnit = null;
+                    levelController.selectedUnit = null;
+                    
                 }
             }
         }
@@ -170,9 +181,9 @@ public class InputController : MonoBehaviour
      */
     public void updateCursor()
     {
-        LevelData levelData = GameObject.Find("Level Controller").GetComponent<LevelController>().levelData;
+        LevelData levelData = levelController.levelData;
         MapTile mt = levelData.getMapTileFromXY(cursorPosition);
-        cursor.transform.position = IsometricHelper.gridToGamePostion(cursorPosition);
+        cursor.transform.position = IsometricHelper.gridToGamePostion(mt.position);
         
     }
 
@@ -185,6 +196,7 @@ public class InputController : MonoBehaviour
         if ("Player Unit".Equals(selectedObject.tag))
         {
             movingUnit = true;
+            levelController.selectedUnit = selectedObject;
             playerUnitUIPanel.SetActive(false);
             panelUIActive = false;
         }
@@ -209,38 +221,6 @@ public class InputController : MonoBehaviour
      * 
      * 
      */
-    public void moveUnitTo(Vector2 destination)
-    {
-        if ("Player Unit".Equals(selectedObject.tag))
-        {
-            selectedObject.transform.position = destination;
-            unitBeingPlaced = selectedObject;
-            selectedObject.GetComponent<PlayerUnitController>().position = cursorPosition;
-            placingUnit = true;
-            if (cursor.GetComponent<CursorController>().objectInTile != null && 
-                "Enemy Unit".Equals(cursor.GetComponent<CursorController>().objectInTile.tag))
-            {
-                movingUnit = false;
-                BattleData battleData = (BattleData)ScriptableObject.CreateInstance("BattleData");
-                battleData.battleMapData = getBattleLevelData();
-                battleData.playerGroup = selectedObject.GetComponent<PlayerUnitController>().unitgroup;
-                battleData.enemyGroup = cursor.GetComponent<CursorController>().objectInTile.GetComponent<EnemyUnitController>().unitgroup;
-                GameObject.Find("Game Data Controller").GetComponent<GameDataController>().gameData.battleData = battleData;
-                string activeSceneName = SceneManager.GetActiveScene().name;
-                Debug.Log("Starting battle");
-                string battleSceneName = "Flat Grass Battle Map";
-                battleData.sceneName = battleSceneName;
-                SceneManager.LoadScene(battleSceneName, LoadSceneMode.Additive);
-                SceneManager.UnloadSceneAsync(activeSceneName);
-            }
-        }
-        movingUnit = false;
-    }
-
-    /**
-     * 
-     * 
-     */
     private void selectObject(GameObject selected)
     {
         selectedObject = selected;
@@ -249,6 +229,7 @@ public class InputController : MonoBehaviour
             case "Player Unit":
                 playerUnitUIPanel.SetActive(true);
                 panelUIActive = true;
+                
                 Debug.Log("selected Player Unit");
                 break;
             case "Enemy Unit":
@@ -262,15 +243,7 @@ public class InputController : MonoBehaviour
         }
     }
 
-    private BattleMapData getBattleLevelData()
-    {
-        BattleMapData battleLevelData = null;
-        MapTile battleTile = levelData.getMapTileFromXY(cursorPosition);
-        if (GameObject.Find("Level Controller") != null) {
-            battleLevelData = GameObject.Find("Level Controller").GetComponent<LevelController>().getCorrectBattleMap(battleTile.groundType);
-        }
-        return battleLevelData;
-    }
+    
 
 
 }

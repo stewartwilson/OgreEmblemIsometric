@@ -13,85 +13,103 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map:
   - groundType: 0
-    elevation: 0
-    x: 0
-    y: 0
+    position:
+      x: 0
+      y: 0
+      elevation: 0
+    safeToStand: 1
+  - groundType: 0
+    position:
+      x: 0
+      y: 1
+      elevation: 0
+    safeToStand: 1
+  - groundType: 0
+    position:
+      x: 0
+      y: 2
+      elevation: 0
+    safeToStand: 1
+  - groundType: 0
+    position:
+      x: 0
+      y: 3
+      elevation: 0
     safeToStand: 0
   - groundType: 0
-    elevation: 0
-    x: 0
-    y: 1
-    safeToStand: 0
+    position:
+      x: 1
+      y: 0
+      elevation: 0
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 0
-    y: 2
-    safeToStand: 0
+    position:
+      x: 1
+      y: 1
+      elevation: 0
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 0
-    y: 3
-    safeToStand: 0
+    position:
+      x: 1
+      y: 2
+      elevation: 0
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 1
-    y: 0
-    safeToStand: 0
+    position:
+      x: 1
+      y: 3
+      elevation: 0
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 1
-    y: 1
-    safeToStand: 0
+    position:
+      x: 2
+      y: 0
+      elevation: 0
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 1
-    y: 2
-    safeToStand: 0
+    position:
+      x: 2
+      y: 1
+      elevation: 0
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 1
-    y: 3
-    safeToStand: 0
+    position:
+      x: 2
+      y: 2
+      elevation: 0
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 2
-    y: 0
-    safeToStand: 0
+    position:
+      x: 2
+      y: 3
+      elevation: 1
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 2
-    y: 1
-    safeToStand: 0
+    position:
+      x: 3
+      y: 0
+      elevation: 0
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 2
-    y: 2
-    safeToStand: 0
+    position:
+      x: 3
+      y: 1
+      elevation: 0
+    safeToStand: 1
   - groundType: 0
-    elevation: 1
-    x: 2
-    y: 3
-    safeToStand: 0
+    position:
+      x: 3
+      y: 2
+      elevation: 1
+    safeToStand: 1
   - groundType: 0
-    elevation: 0
-    x: 3
-    y: 0
-    safeToStand: 0
-  - groundType: 0
-    elevation: 0
-    x: 3
-    y: 1
-    safeToStand: 0
-  - groundType: 0
-    elevation: 1
-    x: 3
-    y: 2
-    safeToStand: 0
-  - groundType: 0
-    elevation: 2
-    x: 3
-    y: 3
-    safeToStand: 0
+    position:
+      x: 3
+      y: 3
+      elevation: 2
+    safeToStand: 1
   textFile: {fileID: 4900000, guid: 7ab18397104cba24797ca9748fc969a0, type: 3}
   endLine: 3
   sceneName: Level 1
+  possibleBattleList:
+  - {fileID: 11400000, guid: bc6e46804cf343a49af9fba3d6ec3ba8, type: 2}

@@ -14,7 +14,8 @@ public class LevelData : ScriptableObject
     public int endLine;
     [SerializeField]
     public string sceneName;
-
+    [SerializeField]
+    public List<BattleMapData> possibleBattleList;
 
 
     /**  
@@ -66,6 +67,19 @@ public class LevelData : ScriptableObject
             }
         }
         return maxY;
+    }
+
+    public BattleMapData getCorrectBattleMap(MapTile player, MapTile enemy)
+    {
+        //TODO accoutn for more scenarios
+        foreach (BattleMapData bmd in possibleBattleList)
+        {
+            if (bmd.groundType == player.groundType)
+            {
+                return bmd;
+            }
+        }
+        return possibleBattleList[0];
     }
 
     /**  

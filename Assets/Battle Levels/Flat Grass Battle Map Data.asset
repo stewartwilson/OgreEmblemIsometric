@@ -14,5 +14,6 @@ MonoBehaviour:
   map: []
   textFile: {fileID: 4900000, guid: c33de87a5b95eb345ada8de39cff7890, type: 3}
   endLine: 0
-  sceneName: 
+  sceneName: Flat Grass Battle Map
+  possibleBattleList: []
   groundType: 0
