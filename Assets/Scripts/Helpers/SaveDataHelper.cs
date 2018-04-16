@@ -6,60 +6,11 @@ using UnityEngine;
 
 public static class SaveDataHelper {
 
-    /**
-     * Saves the save data to the disk
-     */
-    public static void saveDataToDisk(SaveData saveData, string saveName)
-    {
-        string savePath = Application.persistentDataPath + "/"+ saveName + ".gd";
-        Debug.Log("Saving file to disk " + savePath);
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(savePath);
-        bf.Serialize(file, saveData);
-        file.Close();
-    }
 
     /**
      * Loads the save data from the disk
      */
-    public static SaveData loadSaveDataFromDisk(string saveName)
-    {
-
-        SaveData saveData = null;
-        string savePath = Application.persistentDataPath + "/"+ saveName + ".gd";
-        Debug.Log("Loading file from disk " + savePath);
-        if (File.Exists(savePath))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(savePath, FileMode.Open);
-            saveData = (SaveData)bf.Deserialize(file);
-            file.Close();
-        }
-        return saveData;
-    }
-
-    public static void updateSaveRecord(string update)
-    {
-        string savePath = Application.persistentDataPath + "/saveRecord.gd";
-        BinaryFormatter bf = new BinaryFormatter();
-        if (File.Exists(savePath))
-        {
-            FileStream file = File.Open(savePath, FileMode.Open);
-            
-            file.Close();
-        }
-        else
-        {
-            FileStream file = File.Create(savePath);
-            bf.Serialize(file, update);
-            file.Close();
-        }
-    }
-
-    /**
-     * Loads the save data from the disk
-     */
-    public static PlayerData loadGameDataFromDisk(string saveName)
+    public static PlayerData loadPlayerData(string saveName)
     {
 
         PlayerData gameData = null;
@@ -77,17 +28,42 @@ public static class SaveDataHelper {
         return gameData;
     }
 
+
     /**
      * Saves the save data to the disk
      */
-    public static void saveDataToDisk(PlayerData gameData, string saveName)
+    public static string updateSaveFile(PlayerData data, string saveName)
     {
-        string jsonString = JsonUtility.ToJson(gameData);
+        //TODO safely make backup of save file before overwriting, restore on faile write
         string savePath = Application.persistentDataPath + "/" + saveName + ".gd";
+        string jsonString = JsonUtility.ToJson(data);
+        Debug.Log("Saving file to disk " + savePath);
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = new FileStream(savePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+        file.SetLength(0);
+        bf.Serialize(file, jsonString);
+        file.Close();
+        return saveName;
+    }
+
+    /**
+     * Saves the save data to the disk
+     */
+    public static string createSaveFile(PlayerData data)
+    {
+        string saveName = createPlayerSaveName(data);
+        string savePath = Application.persistentDataPath + "/" + saveName + ".gd";
+        string jsonString = JsonUtility.ToJson(data);
         Debug.Log("Saving file to disk " + savePath);
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(savePath);
         bf.Serialize(file, jsonString);
         file.Close();
+        return saveName;
+    }
+
+    public static string createPlayerSaveName(PlayerData data)
+    {
+        return data.playerName;
     }
 }

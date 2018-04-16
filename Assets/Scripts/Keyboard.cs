@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Keyboard : MonoBehaviour {
@@ -23,7 +24,7 @@ public class Keyboard : MonoBehaviour {
         userInput = "";
         genrateRowsFromFile(0);
         updateKeysFromRows();
-
+        SceneManager.LoadScene("Persistence", LoadSceneMode.Additive);
 
     }
 
@@ -166,6 +167,11 @@ public class Keyboard : MonoBehaviour {
     public void clickEnter()
     {
         
+        PlayerData newPlayer = PlayerDataHelper.createNewPlayer(userInput);
+        GameData newGameData = (GameData)ScriptableObject.CreateInstance("GameData");
+        newGameData.name = "gameDataContainer";
+        newGameData.playerData = newPlayer;
+        GameObject.Find("Game Data Controller").GetComponent<GameDataController>().gameData = newGameData;
     }
 
     public void clickBackspace()
@@ -173,10 +179,7 @@ public class Keyboard : MonoBehaviour {
         if (userInput.Length > 0)
         {
             userInput = userInput.Remove(userInput.Length - 1);
-        } else
-        {
-
-        }
+        } 
     }
 
     public void clickShift()

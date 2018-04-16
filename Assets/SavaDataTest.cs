@@ -18,11 +18,11 @@ public class SavaDataTest : MonoBehaviour {
 
 	public void LoadSaveFile()
     {
-        gameData.playerData = SaveDataHelper.loadGameDataFromDisk(gameName);
+        gameData.playerData = SaveDataHelper.loadPlayerData(gameName);
     }
 
     public void SaveGameData()
     {
-        SaveDataHelper.saveDataToDisk(gameData.playerData, gameName);
+        SaveDataHelper.createSaveFile(gameData.playerData);
     }
 }

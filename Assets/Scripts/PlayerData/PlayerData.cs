@@ -7,6 +7,7 @@ public class PlayerData {
     public string playerName;
     public string playTime;
     public string currentMission;
+    public string saveName;
     [SerializeField]
     List<Unit> units;
     [SerializeField]
