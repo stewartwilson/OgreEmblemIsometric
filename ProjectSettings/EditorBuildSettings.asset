@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: c8d7cc90c1c87b947bb8a00656f4c892
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Persistence.unity
     guid: 75f51bf762513be47befc7732e1988f8
@@ -41,3 +41,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Battle Maps/Flat Grass Battle Map.unity
     guid: 3cf9e8867e1d8c44bbb5d72f4bcb62ac
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Opening Cutscene.unity
+    guid: d2f3fe9bba2c9f84dbfacc35322a4fa0

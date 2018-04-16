@@ -761,9 +761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44b1281ef0d1ba4d95b66bf0a383f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelName: 
   levelData: {fileID: 11400000, guid: 2ad9b46cb4a65fb46b50199394be7b2e, type: 2}
-  possibleBattleList:
-  - {fileID: 11400000, guid: bc6e46804cf343a49af9fba3d6ec3ba8, type: 2}
   unitData:
     unitPositions: []
     battleStarted: 0
@@ -771,11 +770,12 @@ MonoBehaviour:
     battleUnitEnemy: {fileID: 0}
   generateMapObjects: 1
   updateLevelData: 0
-  updateLevelDataBasic: 0
+  updateLevelDataBasic: 1
   selectedUnit: {fileID: 0}
   movesContainer: {fileID: 484582093}
   displayingMoves: 0
   possibleMoves: []
+  initiatingBattle: 0
 --- !u!4 &631037671
 Transform:
   m_ObjectHideFlags: 0
