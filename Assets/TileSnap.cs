@@ -28,7 +28,8 @@ public class TileSnap : MonoBehaviour {
                     int rounded = Mathf.RoundToInt(yPos / ySnap);
                     child.position = new Vector2(xPos, rounded * ySnap);
                 }
-
+                int layer = Mathf.RoundToInt(yPos / ySnap);
+                child.GetComponent<SpriteRenderer>().sortingOrder = -layer;
             }
         }
     }
