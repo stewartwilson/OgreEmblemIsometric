@@ -6,6 +6,23 @@ using UnityEngine;
 
 public static class SaveDataHelper {
 
+    /**
+     * Loads the save data from the disk
+     */
+    public static List<PlayerData> getListOfSaves()
+    {
+
+        List<PlayerData> saveList = new List<PlayerData>();
+        DirectoryInfo info = new DirectoryInfo(Application.persistentDataPath);
+        FileInfo[] fileInfo = info.GetFiles();
+        foreach (FileInfo file in fileInfo)
+        {
+            saveList.Add(loadPlayerData(file.Name));
+            Debug.Log("Loading file from disk " + file.Name);
+        }
+        
+        return saveList;
+    }
 
     /**
      * Loads the save data from the disk
@@ -14,7 +31,7 @@ public static class SaveDataHelper {
     {
 
         PlayerData gameData = null;
-        string savePath = Application.persistentDataPath + "/" + saveName + ".gd";
+        string savePath = Application.persistentDataPath + "/" + saveName;
         Debug.Log("Loading file from disk " + savePath);
         if (File.Exists(savePath))
         {
@@ -35,7 +52,7 @@ public static class SaveDataHelper {
     public static string updateSaveFile(PlayerData data, string saveName)
     {
         //TODO safely make backup of save file before overwriting, restore on faile write
-        string savePath = Application.persistentDataPath + "/" + saveName + ".gd";
+        string savePath = Application.persistentDataPath + "/" + saveName;
         string jsonString = JsonUtility.ToJson(data);
         Debug.Log("Saving file to disk " + savePath);
         BinaryFormatter bf = new BinaryFormatter();
@@ -52,7 +69,7 @@ public static class SaveDataHelper {
     public static string createSaveFile(PlayerData data)
     {
         string saveName = createPlayerSaveName(data);
-        string savePath = Application.persistentDataPath + "/" + saveName + ".gd";
+        string savePath = Application.persistentDataPath + "/" + saveName;
         string jsonString = JsonUtility.ToJson(data);
         Debug.Log("Saving file to disk " + savePath);
         BinaryFormatter bf = new BinaryFormatter();

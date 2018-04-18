@@ -113,6 +113,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &68579049 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114576340496511974, guid: a03c501e4fecdcb48a8201467598c34f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1511735604}
+  m_Script: {fileID: 11500000, guid: 6bbc40985b5571d46bb9a2d5627a6413, type: 3}
+--- !u!1 &288341303 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1491673627495460, guid: a03c501e4fecdcb48a8201467598c34f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1511735604}
 --- !u!1 &369883172
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +527,30 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OpenLoadGameScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1491673627495460, guid: a03c501e4fecdcb48a8201467598c34f, type: 2}
+      propertyPath: m_Name
+      value: New Game Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 114508262934756020, guid: a03c501e4fecdcb48a8201467598c34f,
+        type: 2}
+      propertyPath: m_Text
+      value: New Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 114423184818892502, guid: a03c501e4fecdcb48a8201467598c34f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 68579049}
+    - target: {fileID: 114423184818892502, guid: a03c501e4fecdcb48a8201467598c34f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartNewGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114223406285715914, guid: a03c501e4fecdcb48a8201467598c34f,
+        type: 2}
+      propertyPath: m_FirstSelected
+      value: 
+      objectReference: {fileID: 288341303}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a03c501e4fecdcb48a8201467598c34f, type: 2}
   m_IsPrefabParent: 0

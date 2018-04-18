@@ -124,7 +124,7 @@ public class LevelController : MonoBehaviour {
         foreach(MapTile mt in levelData.map)
         {
             count++;
-            GameObject go = (GameObject)Instantiate(Resources.Load("Pixel Tile"));
+            GameObject go = (GameObject)Instantiate(Resources.Load("Tile"));
             go.transform.SetParent(GameObject.Find("Tiles").transform);
             go.transform.position = IsometricHelper.gridToGamePostion(mt.position);
             go.GetComponent<SpriteRenderer>().sortingOrder = IsometricHelper.getTileSortingOrder(mt.position);

@@ -8,6 +8,8 @@ public class PlayerData {
     public string playTime;
     public string currentMission;
     public string saveName;
+    public bool inOverworld;
+    public int overworldPosition;
     [SerializeField]
     List<Unit> units;
     [SerializeField]

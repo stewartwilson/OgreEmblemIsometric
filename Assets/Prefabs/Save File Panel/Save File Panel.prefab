@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 222843632798147192}
   - component: {fileID: 114155222792381842}
   m_Layer: 5
-  m_Name: Last Played Value
+  m_Name: Current Mission Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 222303311978691816}
   - component: {fileID: 114389879542821030}
   m_Layer: 5
-  m_Name: Last Played
+  m_Name: Current Mission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Last Played: '
+  m_Text: 'Current Mission: '
 --- !u!114 &114507617657798262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -700,7 +700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 185, y: -60}
+  m_AnchoredPosition: {x: 210, y: -60}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224807248364366198

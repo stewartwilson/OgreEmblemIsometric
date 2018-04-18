@@ -8,6 +8,11 @@ public static class PlayerDataHelper {
     {
         PlayerData newPlayer = new PlayerData();
         newPlayer.playerName = name;
+        newPlayer.saveName = name+".gd";
+        newPlayer.playTime = "0";
+        newPlayer.currentMission = "Opening Cutscene";
+        newPlayer.inOverworld = false;
+        newPlayer.overworldPosition = 0;
         initPlayerSaveFile(newPlayer);
         return newPlayer;
     }

@@ -14,7 +14,7 @@ public class Keyboard : MonoBehaviour {
     public string spriteType;
 
     public string userInput;
-    public Text name;
+    public Text characterName;
     public int maxNameLength;
     public bool isUpper = true;
 
@@ -67,10 +67,10 @@ public class Keyboard : MonoBehaviour {
 	void Update () {
         if (userInput != null && userInput.Length > 0)
         {
-            name.text = userInput;
+            characterName.text = userInput;
         } else
         {
-            name.text = "";
+            characterName.text = "";
         }
     }
 
@@ -144,6 +144,13 @@ public class Keyboard : MonoBehaviour {
                     row3[i] = tempValue.ToUpper();
                 }
             }
+            if(tempValue.Equals("Up"))
+            {
+                row3[i] = "Lwr";
+            } else if (tempValue.Equals("Lwr"))
+            {
+                row3[i] = "Up";
+            }
         }
 
         isUpper = !isUpper;
@@ -166,12 +173,8 @@ public class Keyboard : MonoBehaviour {
 
     public void clickEnter()
     {
+        GameObject.Find("Character Creator Controller").GetComponent<CharacterCreatorController>().createCharacter(userInput);
         
-        PlayerData newPlayer = PlayerDataHelper.createNewPlayer(userInput);
-        GameData newGameData = (GameData)ScriptableObject.CreateInstance("GameData");
-        newGameData.name = "gameDataContainer";
-        newGameData.playerData = newPlayer;
-        GameObject.Find("Game Data Controller").GetComponent<GameDataController>().gameData = newGameData;
     }
 
     public void clickBackspace()
