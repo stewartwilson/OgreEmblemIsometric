@@ -269,6 +269,14 @@ MonoBehaviour:
   enemyElevation: 0
   updateLevelData: 1
   generateMapObjects: 1
+  timeBetweenActions: 0
+  nextActionAllowed: 0
+  turnOrder: []
+  nextUnitToAct: {fileID: 0}
+  turnNumber: 0
+  maxTurns: 0
+  enemyNetDamageTaken: 0
+  playerNetDamageTaken: 0
 --- !u!4 &1416158256
 Transform:
   m_ObjectHideFlags: 0

@@ -37,9 +37,10 @@ public static class SaveDataHelper {
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(savePath, FileMode.Open);
-            string jsonString = (string)bf.Deserialize(file);
-            Debug.Log(jsonString);
-            gameData = JsonUtility.FromJson<PlayerData>(jsonString);
+            //string jsonString = (string)bf.Deserialize(file);
+            //Debug.Log(jsonString);
+            //gameData = JsonUtility.FromJson<PlayerData>(jsonString);
+            gameData = (PlayerData)bf.Deserialize(file);
             file.Close();
         }
         return gameData;
@@ -74,7 +75,7 @@ public static class SaveDataHelper {
         Debug.Log("Saving file to disk " + savePath);
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(savePath);
-        bf.Serialize(file, jsonString);
+        bf.Serialize(file, data);
         file.Close();
         return saveName;
     }
